@@ -6,3 +6,5 @@ geckodriver
 *.class
 
 .idea/workspace.xml
+
+*.xml
