@@ -8,3 +8,5 @@ geckodriver
 .idea/workspace.xml
 
 *.xml
+
+src/test/java/litecart/src/java/AdminLoginTest.java
