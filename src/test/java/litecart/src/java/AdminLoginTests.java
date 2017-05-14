@@ -1,52 +1,31 @@
 package litecart.src.java;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by valeriyagagarina on 4/26/17.
  */
-public class AdminLoginTests {
+public class AdminLoginTests extends BaseTest{
 
-    WebDriver driver;
-    WebDriverWait wait;
 
-    @BeforeClass
-    public void setup(){
-        
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
-    }
-
-    @AfterClass
-    public void finish(){
-
-        driver.quit();
-    }
 
     @Test
-    public void testLoginAsAdmin() throws InterruptedException {
+    public void testLoginAsAdmin() {
 
-        driver.navigate().to("http://localhost/litecart/admin/login.php");
+        goTo("http://localhost/litecart/admin/login.php");
         driver.findElement(By.name("username")).sendKeys("admin");
         driver.findElement(By.name("password")).sendKeys("admin");
         driver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
     }
 
     @Test(dependsOnMethods = {"testLoginAsAdmin"})
-    public void testLeftMenuLinks() throws InterruptedException {
+    public void testLeftMenuLinks() {
         // wait untill the page is loaded
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("name")));
 
@@ -76,18 +55,8 @@ public class AdminLoginTests {
     }
 
     @Test(dependsOnMethods = {"testLeftMenuLinks"})
-    public void testLogoutAsAdmin() throws InterruptedException {
+    public void testLogoutAsAdmin() {
 
         driver.findElement(By.className("fa-sign-out")).click();
-    }
-
-    // helper methods
-    private List<String> getElementNames(List<WebElement> elements){
-        List<String> names = new ArrayList<String>();
-        for(WebElement e : elements){
-            names.add(e.getText());
-        }
-
-        return names;
     }
 }
