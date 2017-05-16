@@ -23,6 +23,7 @@ public class TestProductsLabel extends BaseTest{
 
         // verify that each product has exactly one sticker
         for(WebElement e : products){
+            System.out.println(e.findElement(By.className("sticker")).getAttribute("textContent"));
             Assert.assertEquals( e.findElements(By.className("sticker")).size(), 1);
         }
     }

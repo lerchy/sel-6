@@ -1,11 +1,14 @@
 package litecart.src.java;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +34,24 @@ public class BaseTest {
     }
 
     // helper methods
-    protected void goTo(String url){
+    void goTo(String url){
         driver.navigate().to(url);
     }
 
-    protected List<String> getElementNames(List<WebElement> elements){
+    void login(String username, String password, String confirmLocator){
+        driver.findElement(By.name("username")).sendKeys(username);
+        driver.findElement(By.name("password")).sendKeys(password);
+        driver.findElement(By.xpath(confirmLocator)).click();
+        // wait untill the page is loaded
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fa-sign-out")));
+    }
+
+    public void logout() {
+
+        driver.findElement(By.className("fa-sign-out")).click();
+    }
+
+    List<String> getElementNames(List<WebElement> elements){
         List<String> names = new ArrayList<String>();
         for(WebElement e : elements){
             names.add(e.getText());

@@ -19,9 +19,7 @@ public class AdminLoginTests extends BaseTest{
     public void testLoginAsAdmin() {
 
         goTo("http://localhost/litecart/admin/login.php");
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).sendKeys("admin");
-        driver.findElement(By.xpath("//button[contains(text(),'Login')]")).click();
+        login("admin", "admin", "//button[contains(text(),'Login')]");
     }
 
     @Test(dependsOnMethods = {"testLoginAsAdmin"})
@@ -50,13 +48,9 @@ public class AdminLoginTests extends BaseTest{
                 System.out.println("    Sub menu item name is " + se);
                 driver.findElement(By.xpath("//span[text()='" + se + "']")).click();
                 Assert.assertTrue(driver.findElement(By.tagName("h1")).isDisplayed());
+
+                logout();
             }
         }
-    }
-
-    @Test(dependsOnMethods = {"testLeftMenuLinks"})
-    public void testLogoutAsAdmin() {
-
-        driver.findElement(By.className("fa-sign-out")).click();
     }
 }
