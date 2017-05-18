@@ -10,3 +10,5 @@ geckodriver
 *.xml
 
 src/test/java/litecart/src/java/AdminLoginTest.java
+
+src/test/java/test/One.java

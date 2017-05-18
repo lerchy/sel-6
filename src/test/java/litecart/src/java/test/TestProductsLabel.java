@@ -1,4 +1,4 @@
-package litecart.src.java;
+package litecart.src.java.test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,7 +21,7 @@ public class TestProductsLabel extends BaseTest{
         // find all products on the home page and save them to a list
         List<WebElement> products = driver.findElements(By.className("image-wrapper"));
 
-        // verify that each product has exactly one sticker
+        // verify that each prodContainer has exactly one sticker
         for(WebElement e : products){
             System.out.println(e.findElement(By.className("sticker")).getAttribute("textContent"));
             Assert.assertEquals( e.findElements(By.className("sticker")).size(), 1);

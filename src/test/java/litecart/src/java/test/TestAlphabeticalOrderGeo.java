@@ -1,4 +1,4 @@
-package litecart.src.java;
+package litecart.src.java.test;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;

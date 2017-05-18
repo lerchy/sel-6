@@ -1,4 +1,4 @@
-package litecart.src.java;
+package litecart.src.java.test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -35,7 +35,7 @@ public class AdminLoginTests extends BaseTest{
         System.out.println("Links number in left menu: " + leftMenuItems.size());
 
         for(String s : leftMenuItemNames){
-            System.out.println("Menu item name is " + s);
+            System.out.println("Menu prodContainer name is " + s);
             driver.findElement(By.xpath("//span[text()='" + s + "']")).click();
             Assert.assertTrue(driver.findElement(By.tagName("h1")).isDisplayed());
 
@@ -45,7 +45,7 @@ public class AdminLoginTests extends BaseTest{
             List<String> leftSubMenuItemNames = getElementNames(menuSubItems);
 
             for(String se : leftSubMenuItemNames){
-                System.out.println("    Sub menu item name is " + se);
+                System.out.println("    Sub menu prodContainer name is " + se);
                 driver.findElement(By.xpath("//span[text()='" + se + "']")).click();
                 Assert.assertTrue(driver.findElement(By.tagName("h1")).isDisplayed());
 
