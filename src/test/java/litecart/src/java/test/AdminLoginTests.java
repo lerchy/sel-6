@@ -20,12 +20,11 @@ public class AdminLoginTests extends BaseTest{
 
         goTo("http://localhost/litecart/admin/login.php");
         login("admin", "admin", "//button[contains(text(),'Login')]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("name")));
     }
 
     @Test(dependsOnMethods = {"testLoginAsAdmin"})
     public void testLeftMenuLinks() {
-        // wait untill the page is loaded
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("name")));
 
         // find all menu items at the left side
         List<WebElement> leftMenuItems = driver.findElements(By.className("name"));

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -58,5 +59,31 @@ public class BaseTest {
         }
 
         return names;
+    }
+
+    public void checkCheckBox(By selector){
+
+        WebElement checkBox = driver.findElement(selector);
+        if(checkBox.getAttribute("checked") == null){
+            checkBox.click();
+        }
+    }
+
+    public void uncheckCheckBox(By selector){
+
+        WebElement checkBox = driver.findElement(selector);
+        if(checkBox.getAttribute("checked") != null){
+            checkBox.click();
+        }
+    }
+
+    public void fillOutField(String selector, String value){
+        driver.findElement(By.cssSelector(selector)).clear();
+        driver.findElement(By.cssSelector(selector)).sendKeys(value);
+    }
+
+    public void selectFromDropDownList(String selector, String value){
+        Select select = new Select(driver.findElement(By.cssSelector(selector)));
+        select.selectByVisibleText(value);
     }
 }
