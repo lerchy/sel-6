@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by valeriyagagarina on 5/14/17.
@@ -61,6 +63,14 @@ public class BaseTest {
         return names;
     }
 
+    public void clickLink(String linkLocator){
+        driver.findElement(By.cssSelector(linkLocator)).click();
+    }
+
+    public void clickButton(String buttonLocator){
+        driver.findElement(By.cssSelector(buttonLocator)).click();
+    }
+
     public void checkCheckBox(By selector){
 
         WebElement checkBox = driver.findElement(selector);
@@ -85,5 +95,13 @@ public class BaseTest {
     public void selectFromDropDownList(String selector, String value){
         Select select = new Select(driver.findElement(By.cssSelector(selector)));
         select.selectByVisibleText(value);
+    }
+
+    void pause(long l){
+        try {
+            Thread.sleep(l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
