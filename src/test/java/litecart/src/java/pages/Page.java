@@ -18,7 +18,7 @@ public class Page {
 
     public Page(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 10);
     }
 
     public void open(String url){
@@ -73,16 +73,5 @@ public class Page {
 
     public void goToHomePage(){
         clickLink("[href='/litecart/']");
-    }
-
-    public void areNumbersEqual(int i, int j){
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver driver){
-                //
-                if (i == j) return true;
-                return null;
-            }
-        });
     }
 }

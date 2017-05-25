@@ -4,6 +4,7 @@ import litecart.src.java.pages.MainPage;
 import litecart.src.java.pages.ProductPage;
 import litecart.src.java.pages.ShoppingCartPage;
 import litecart.src.java.pages.pageBlocks.Header;
+import litecart.src.java.pages.pageBlocks.ShoppingCart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,15 +26,14 @@ public class Application {
     public MainPage mainPage;
     public ProductPage productPage;
     public ShoppingCartPage shoppingCartPage;
-    public Header header;
-
+    public ShoppingCart cart;
 
     public Application(){
         driver = new ChromeDriver();
         mainPage = new MainPage(driver);
         productPage = new ProductPage(driver);
         shoppingCartPage = new ShoppingCartPage(driver);
-        header = new Header(driver);
+        cart = new ShoppingCart(driver);
     }
 
 

@@ -1,5 +1,6 @@
 package litecart.src.java.pages;
 
+import litecart.src.java.pages.pageBlocks.ShoppingCart;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,14 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  */
 public class ShoppingCartPage extends Page{
 
-    private int itemsCount;
-
     public ShoppingCartPage(WebDriver driver){
         super(driver);
-    }
-
-    public int getItemsCount(){
-        return Integer.valueOf(driver.findElement(By.className("quantity")).getText());
     }
 
     public void deleteAllItemsFromCart(){

@@ -1,18 +1,12 @@
 package litecart.src.java.test;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentInElement;
 
 /**
  * Created by valeriyagagarina on 5/22/17.
@@ -30,9 +24,9 @@ public class TestShoppingcart extends BaseTest{
 
         // add all items from the list to the shopping cart
         for(int i = 0; i < itemsToBuy.size(); i++) {
-            app.mainPage.addProductToCart("#popular-products", itemsToBuy.get(i));
-            // wait till the item is added to the shopping cart
-            app.shoppingCartPage.areNumbersEqual(app.shoppingCartPage.getItemsCount(), (i + 1));
+            app.mainPage.chooseProduct("#popular-products", itemsToBuy.get(i));
+            app.productPage.addProductToCart();
+            app.cart.wasItemAdded(i + 1);
             app.productPage.goToHomePage();
         }
 

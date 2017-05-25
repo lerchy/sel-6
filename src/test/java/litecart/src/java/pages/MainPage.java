@@ -17,14 +17,11 @@ public class MainPage extends Page{
         super.open("http://localhost/litecart");
     }
 
-    public void addProductToCart(String tab, String name) {
+    public void chooseProduct(String tab, String name) {
 
         // add product to the shopping cart
         clickLink("[href='" + tab + "']");
         clickLink("[title='" + name + "']");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='add_cart_product']"))).click();
-        expandPage();
-
     }
 
 
