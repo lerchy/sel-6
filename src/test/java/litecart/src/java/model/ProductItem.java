@@ -1,4 +1,4 @@
-package model;
+package litecart.src.java.model;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

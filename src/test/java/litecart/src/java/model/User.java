@@ -1,4 +1,4 @@
-package model;
+package litecart.src.java.model;
 
 /**
  * Created by valeriyagagarina on 5/19/17.

@@ -1,6 +1,6 @@
 package litecart.src.java.test;
 
-import model.User;
+import litecart.src.java.model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,21 +13,34 @@ import org.testng.annotations.Test;
  */
 
 public class TestNewUserRegistration extends BaseTest{
-    String email = System.currentTimeMillis() / 1000L + "@testmail.com";
-    User newUser = new User("Max", "Mustermann", "Fake Address", email, "password");
+
+    User newUser = new User("Max", "Mustermann", "Fake Address",
+            System.currentTimeMillis() / 1000L + "@testmail.com", "password");
 
     public void logout(){
-        driver.findElement(By.linkText("Logout")).click();
+        app.driver.findElement(By.linkText("Logout")).click();
     }
 
     @Test
     public void testNewUserCreation(){
 
         goTo("http://localhost/litecart/en/");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("logotype")));
+        app.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("logotype")));
 
-        driver.findElement(By.linkText("New customers click here")).click();
-        WebElement loginRegistrationForm = driver.findElement(By.id("content"));
+        registerNewUser();
+
+        Assert.assertTrue(app.driver.findElement(By.className("alert")).getText().contains("Your customer account has been created."));
+
+        // logout
+        logout();
+        Assert.assertTrue(app.driver.findElement(By.className("alert")).getText().contains("You are now logged out."));
+    }
+
+
+
+    private void registerNewUser() {
+        app.driver.findElement(By.linkText("New customers click here")).click();
+        WebElement loginRegistrationForm = app.driver.findElement(By.id("content"));
 
         loginRegistrationForm.findElement(By.cssSelector("[name='firstname']")).sendKeys(newUser.firstName);
         loginRegistrationForm.findElement(By.cssSelector("[name='lastname']")).sendKeys(newUser.lastName);
@@ -38,30 +51,24 @@ public class TestNewUserRegistration extends BaseTest{
 
         // submit login form
         loginRegistrationForm.findElement(By.cssSelector("[name='create_account']")).click();
-        Assert.assertTrue(driver.findElement(By.className("alert")).getText().contains("Your customer account has been created."));
-
-        // logout
-        logout();
-        Assert.assertTrue(driver.findElement(By.className("alert")).
-                getText().contains("You are now logged out."));
     }
 
     @Test(dependsOnMethods = {"testNewUserCreation"})
     public void testUserLogin(){
 
-        WebElement loginForm = driver.findElement(By.id("sidebar"));
+        WebElement loginForm = app.driver.findElement(By.id("sidebar"));
 
         loginForm.findElement(By.cssSelector("[name='email']")).sendKeys(newUser.email);
         loginForm.findElement(By.cssSelector("[name='password']")).sendKeys(newUser.password);
 
         // submit login form
         loginForm.findElement(By.cssSelector("[name='login']")).click();
-        Assert.assertTrue(driver.findElement(By.className("alert")).
+        Assert.assertTrue(app.driver.findElement(By.className("alert")).
                 getText().contains("You are now logged in as " + newUser.firstName + " " + newUser.lastName));
 
         // logout
         logout();
-        Assert.assertTrue(driver.findElement(By.className("alert")).
+        Assert.assertTrue(app.driver.findElement(By.className("alert")).
                 getText().contains("You are now logged out."));
     }
 }

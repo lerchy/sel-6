@@ -25,25 +25,26 @@ public class TestOpeningLinksInNewWindows extends BaseTest {
         // open page 'Countries'
         goTo("http://localhost/litecart/admin/?app=countries&doc=countries");
         login("admin", "admin", "//button[contains(text(),'Login')]");
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("[name='countries_form']"))));
+        app.wait.until(ExpectedConditions.visibilityOf(app.driver.findElement(By.cssSelector("[name='countries_form']"))));
 
-        driver.findElement(By.cssSelector("[title='Edit']")).click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//h1[contains(text(), 'Edit Country')]"))));
+        app.driver.findElement(By.cssSelector("[title='Edit']")).click();
+        app.wait.until(ExpectedConditions.visibilityOf(app.driver.findElement(By.xpath("//h1[contains(text(), " +
+                "'Edit Country')]"))));
 
-        String existingWindow = driver.getWindowHandle();
+        String existingWindow = app.driver.getWindowHandle();
         System.out.println(existingWindow);
 
-        List<WebElement> links = driver.findElements(By.className("fa-external-link"));
+        List<WebElement> links = app.driver.findElements(By.className("fa-external-link"));
         int numberOflinks = links.size();
         for(int i = 0; i < numberOflinks; i++){
             links.get(i).click();
-            wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-            Set<String> windows = driver.getWindowHandles();
+            app.wait.until(ExpectedConditions.numberOfWindowsToBe(2));
+            Set<String> windows = app.driver.getWindowHandles();
             windows.remove(existingWindow);
             String newWindow = windows.iterator().next();
-            driver.switchTo().window(newWindow);
-            driver.close();
-            driver.switchTo().window(existingWindow);
+            app.driver.switchTo().window(newWindow);
+            app.driver.close();
+            app.driver.switchTo().window(existingWindow);
         }
     }
 }

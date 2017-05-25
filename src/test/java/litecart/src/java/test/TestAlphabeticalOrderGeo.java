@@ -43,7 +43,7 @@ public class TestAlphabeticalOrderGeo extends BaseTest {
             // if there are more then 1 zone for a country click the link with country name
             int zonesCount = Integer.parseInt(rows.get(i).findElements(By.tagName("td")).get(zoneColNum).getText());
             if (zonesCount > 1){
-                driver.findElement(By.linkText(currentCountryName)).click();
+                app.driver.findElement(By.linkText(currentCountryName)).click();
 
                 // check if zones are in alphabetical order (for countries with more then one zone)
                 initTable();
@@ -57,7 +57,7 @@ public class TestAlphabeticalOrderGeo extends BaseTest {
                     Assert.assertTrue(nextZoneName.compareTo(currentZoneName) > 0);
                 }
 
-                driver.navigate().back();
+                app.driver.navigate().back();
                 initTable();
             }
         }
@@ -85,8 +85,8 @@ public class TestAlphabeticalOrderGeo extends BaseTest {
             System.out.println("Country name is " + countryName);
 
             // click the link with country name
-            driver.findElement(By.linkText(countryName)).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("td")));
+            app.driver.findElement(By.linkText(countryName)).click();
+            app.wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("td")));
 
             // check if zones are in alphabetical order
             initTable();
@@ -100,7 +100,7 @@ public class TestAlphabeticalOrderGeo extends BaseTest {
                 Assert.assertTrue(nextZoneName.compareTo(currentZoneName) > 0);
                 }
 
-                driver.navigate().back();
+            app.driver.navigate().back();
                 initTable();
 
         }
@@ -108,7 +108,7 @@ public class TestAlphabeticalOrderGeo extends BaseTest {
     }
 
     private void initTable(){
-        table = driver.findElement(By.tagName("tbody"));
+        table = app.driver.findElement(By.tagName("tbody"));
         rows = table.findElements(By.tagName("tr"));
     }
 

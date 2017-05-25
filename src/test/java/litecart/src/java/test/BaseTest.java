@@ -1,5 +1,6 @@
 package litecart.src.java.test;
 
+import litecart.src.java.app.Application;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,88 +21,29 @@ import java.util.concurrent.TimeUnit;
  * Created by valeriyagagarina on 5/14/17.
  */
 public class BaseTest {
-    WebDriver driver;
-    WebDriverWait wait;
 
-    @BeforeClass
-    public void setup(){
-
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 10);
-    }
+    Application app = new Application();
 
     @AfterClass
     public void finish(){
-
-        driver.quit();
+        app.quite();
     }
 
-    // helper methods
-    void goTo(String url){
-        driver.navigate().to(url);
-    }
+
 
     void login(String username, String password, String confirmLocator){
-        driver.findElement(By.name("username")).sendKeys(username);
-        driver.findElement(By.name("password")).sendKeys(password);
-        driver.findElement(By.xpath(confirmLocator)).click();
+        app.driver.findElement(By.name("username")).sendKeys(username);
+        app.driver.findElement(By.name("password")).sendKeys(password);
+        app.driver.findElement(By.xpath(confirmLocator)).click();
         // wait untill the page is loaded
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fa-sign-out")));
+        app.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fa-sign-out")));
     }
 
     public void logout() {
 
-        driver.findElement(By.className("fa-sign-out")).click();
+        app.driver.findElement(By.className("fa-sign-out")).click();
     }
 
-    List<String> getElementNames(List<WebElement> elements){
-        List<String> names = new ArrayList<String>();
-        for(WebElement e : elements){
-            names.add(e.getText());
-        }
 
-        return names;
-    }
 
-    public void clickLink(String linkLocator){
-        driver.findElement(By.cssSelector(linkLocator)).click();
-    }
-
-    public void clickButton(String buttonLocator){
-        driver.findElement(By.cssSelector(buttonLocator)).click();
-    }
-
-    public void checkCheckBox(By selector){
-
-        WebElement checkBox = driver.findElement(selector);
-        if(checkBox.getAttribute("checked") == null){
-            checkBox.click();
-        }
-    }
-
-    public void uncheckCheckBox(By selector){
-
-        WebElement checkBox = driver.findElement(selector);
-        if(checkBox.getAttribute("checked") != null){
-            checkBox.click();
-        }
-    }
-
-    public void fillOutField(String selector, String value){
-        driver.findElement(By.cssSelector(selector)).clear();
-        driver.findElement(By.cssSelector(selector)).sendKeys(value);
-    }
-
-    public void selectFromDropDownList(String selector, String value){
-        Select select = new Select(driver.findElement(By.cssSelector(selector)));
-        select.selectByVisibleText(value);
-    }
-
-    void pause(long l){
-        try {
-            Thread.sleep(l);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 }

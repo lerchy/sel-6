@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
-import model.ProductItem;
+import litecart.src.java.model.ProductItem;
 
 /**
  * Created by valeriyagagarina on 5/17/17.
@@ -19,16 +19,16 @@ public class ProductPageTests extends BaseTest{
 
         // load the main page
         goTo("http://localhost/litecart/en/");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("logotype")));
+        app.wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("logotype")));
 
         // init the product from main page
-        productMP = new ProductItem(driver, By.id("campaign-products"));
+        productMP = new ProductItem(app.driver, By.id("campaign-products"));
 
         // go to campain page
-        driver.findElement(By.cssSelector("[title='Yellow Duck']")).click();
+        app.driver.findElement(By.cssSelector("[title='Yellow Duck']")).click();
 
         // init the product from the campain page
-        productPP = new ProductItem(driver);
+        productPP = new ProductItem(app.driver);
     }
 
     //  на главной странице и на странице товара совпадает текст названия товара

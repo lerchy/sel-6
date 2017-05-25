@@ -1,6 +1,4 @@
-package model;
-
-import java.io.File;
+package litecart.src.java.model;
 
 /**
  * Created by valeriyagagarina on 5/21/17.

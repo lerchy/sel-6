@@ -19,7 +19,7 @@ public class TestProductsLabel extends BaseTest{
         goTo("http://localhost/litecart/en/");
 
         // find all products on the home page and save them to a list
-        List<WebElement> products = driver.findElements(By.className("image-wrapper"));
+        List<WebElement> products = app.driver.findElements(By.className("image-wrapper"));
 
         // verify that each prodContainer has exactly one sticker
         for(WebElement e : products){
