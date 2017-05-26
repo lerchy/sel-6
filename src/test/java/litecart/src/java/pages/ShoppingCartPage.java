@@ -25,4 +25,8 @@ public class ShoppingCartPage extends Page{
             wait.until(ExpectedConditions.stalenessOf(buttonDeleteItem));
         }
     }
+
+    public boolean isCartEmpty(){
+        return driver.findElement(By.tagName("p")).getText().contains("There are no items in your cart.");
+    }
 }

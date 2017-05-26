@@ -20,7 +20,7 @@ public class ShoppingCart extends PageBlock{
     }
 
 
-    public void wasItemAdded(int countAfter){
+    public  void  wasItemAdded(int countAfter){
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver driver){
